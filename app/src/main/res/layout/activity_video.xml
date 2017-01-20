@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SurfaceView
+        android:id="@+id/main_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="12dp"
+            android:textColor="#ffffff"
+            android:text="双击放大"/>
+
+        <com.werb.mediautilsdemo.widget.SendView
+            android:id="@+id/view_send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:id="@+id/record_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.werb.mediautilsdemo.widget.VideoProgressBar
+                android:id="@+id/main_progress_bar"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerInParent="true" />
+
+            <TextView
+                android:id="@+id/main_press_control"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/video_btn_bg"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:id="@+id/btn_close"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_close_white_24dp"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

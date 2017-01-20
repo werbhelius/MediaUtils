@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F8FA">
+
+    <RelativeLayout
+        android:id="@+id/audio_layout"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:background="@drawable/mic_bg"
+        android:layout_centerInParent="true">
+
+        <Chronometer
+            android:id="@+id/time_display"
+            android:layout_above="@+id/mic_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/mic_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_below="@+id/mic_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_mic"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@drawable/mic_bg"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="按下说话"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+        <View
+            android:layout_width="50dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
