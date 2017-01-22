@@ -1,8 +1,10 @@
 package com.werb.mediautilsdemo;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaRecorder;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -14,6 +16,7 @@ import android.view.View;
 import com.werb.mediautilsdemo.widget.AutoFitTextureView;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -50,20 +53,10 @@ public class MediaUtils implements SurfaceHolder.Callback {
         this.recorderType = type;
     }
 
-    /**
-     * Dir
-     *
-     * @param file targetDir
-     */
     public void setTargetDir(File file) {
         this.targetDir = file;
     }
 
-    /**
-     * name with suffix
-     *
-     * @param name
-     */
     public void setTargetName(String name) {
         this.targetName = name;
     }
@@ -339,6 +332,28 @@ public class MediaUtils implements SurfaceHolder.Callback {
                 mCamera.setParameters(parameters);
             }
         }
+    }
+
+    private  String getVideoThumb(String path) {
+        MediaMetadataRetriever media = new MediaMetadataRetriever();
+        media.setDataSource(path);
+        return bitmap2File(media.getFrameAtTime());
+    }
+
+    private  String bitmap2File(Bitmap bitmap) {
+        File thumbFile = new File(targetDir,
+                targetName);
+        if (thumbFile.exists()) thumbFile.delete();
+        FileOutputStream fOut;
+        try {
+            fOut = new FileOutputStream(thumbFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (IOException e) {
+            return null;
+        }
+        return thumbFile.getAbsolutePath();
     }
 
 }
