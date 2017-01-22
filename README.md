@@ -20,8 +20,8 @@ GitHub 地址：[https://github.com/Werb/MediaUtils](https://github.com/Werb/Med
 
 ### 效果图
 
-<!-- <img src="/screenshots/video.gif" alt="screenshot" title="home" width="360" height="640" />
-<img src="/screenshots/audio.gif" alt="screenshot" title="home" width="360" height="640" /> -->
+<img src="/screenshots/video.gif" alt="screenshot" title="home" width="360" height="640" />
+<img src="/screenshots/audio.gif" alt="screenshot" title="home" width="360" height="640" />
 
 ### 核心类
 #### MediaUtils
