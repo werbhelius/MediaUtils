@@ -227,7 +227,15 @@ public class MediaUtils implements SurfaceHolder.Callback {
                 previewWidth = optimalSize.width;
                 previewHeight = optimalSize.height;
                 parameters.setPreviewSize(previewWidth, previewHeight);
-                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_CIF);
+                profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+                // 这里是重点，分辨率和比特率
+                // 分辨率越大视频大小越大，比特率越大视频越清晰
+                // 清晰度由比特率决定，视频尺寸和像素量由分辨率决定
+                // 比特率越高越清晰（前提是分辨率保持不变），分辨率越大视频尺寸越大。
+                profile.videoFrameWidth = optimalSize.width;
+                profile.videoFrameHeight = optimalSize.height;
+                // 这样设置 1080p的视频 大小在5M , 可根据自己需求调节
+                profile.videoBitRate = 2 * optimalSize.width * optimalSize.height;
                 List<String> focusModes = parameters.getSupportedFocusModes();
                 if (focusModes != null) {
                     for (String mode : focusModes) {

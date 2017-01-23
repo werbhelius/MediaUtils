@@ -44,49 +44,22 @@ GitHub 地址：[https://github.com/Werb/MediaUtils](https://github.com/Werb/Med
 #### CameraHelper
 * 在 Android 中录制视频时显示的 Size 和实际拍照的 Size 是由 Camera 所决定的，最好的方法是计算出可支持的 PreviewSize 和 VideoSize 计算出一个合适的size，同时根据自己视频的用途，选择合理的 Size
 * CameraHelper 参考自 GoogleCameraSample 帮助你计算出合适的 Size
-```
-  public static Camera.Size getOptimalVideoSize(List<Camera.Size> supportedVideoSizes,
-          List<Camera.Size> previewSizes, int w, int h) {
-      final double ASPECT_TOLERANCE = 0.1;
-      double targetRatio = (double) w / h;
-      // sizes
-      List<Camera.Size> videoSizes;
-      if (supportedVideoSizes != null) {
-          videoSizes = supportedVideoSizes;
-      } else {
-          videoSizes = previewSizes;
-      }
-      Camera.Size optimalSize = null;
-      // Start with max value and refine as we iterate over available video sizes. This is the
-      // minimum difference between view and camera height.
-      double minDiff = Double.MAX_VALUE;
-      // Target view height
-      int targetHeight = h;
-      // Try to find a video size that matches aspect ratio and the target view size.
-      // Iterate over all available sizes and pick the largest size that can fit in the view and
-      // still maintain the aspect ratio.
-      for (Camera.Size size : videoSizes) {
-          double ratio = (double) size.width / size.height;
-          if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE)
-              continue;
-          if (Math.abs(size.height - targetHeight) < minDiff && previewSizes.contains(size)) {
-              optimalSize = size;
-              minDiff = Math.abs(size.height - targetHeight);
-          }
-      }
-      // Cannot find video size that matches the aspect ratio, ignore the requirement
-      if (optimalSize == null) {
-          minDiff = Double.MAX_VALUE;
-          for (Camera.Size size : videoSizes) {
-              if (Math.abs(size.height - targetHeight) < minDiff && previewSizes.contains(size)) {
-                  optimalSize = size;
-                  minDiff = Math.abs(size.height - targetHeight);
-              }
-          }
-      }
-      return optimalSize;
-  }
-```
+
+#### CamcorderProfile
+
+这是一个困扰我好久的地方，一直在想录制视频的时候，如何保存清晰度的情况下，还能控制文件的大小，终于找到了一种可行的办法
+
+* 分辨率越大视频大小越大，比特率越大视频越清晰
+* 清晰度由比特率决定，视频尺寸和像素量由分辨率决定
+* 比特率越高越清晰（前提是分辨率保持不变），分辨率越大视频尺寸越大
+* CamcorderProfile 是 Android 提供的一个内置的视频参数配置类
+* videoFrameWidth 录制视频分辨率的宽
+* videoFrameHeight 录制视频分辨率的高
+* videoBitRate 这个就是比特率，决定了视频的清晰度
+* 将分辨率和比特率结合自己的需求，进行有效的控制，可以的到自己想要的效果
+* 本 demo 中，录制1080P的视频，大小在5M左右，还可以再小
+* 最后 videoFrameRate 帧率，这个一般是摄像头会自动调节，所以设置了恒定的有的也不起作用
+
 
 #### 自定义View
 * 仿造新版微信拍摄视频的界面，通过 Paint，RectF，Canvas 绘制
