@@ -59,6 +59,7 @@ GitHub 地址：[https://github.com/Werb/MediaUtils](https://github.com/Werb/Med
 * 将分辨率和比特率结合自己的需求，进行有效的控制，可以的到自己想要的效果
 * 本 demo 中，录制1080P的视频，大小在5M左右，还可以再小
 * 最后 videoFrameRate 帧率，这个一般是摄像头会自动调节，所以设置了恒定的有的也不起作用
+* 部分机型出现不适配的地方，请及时提 issue 联系我
 
 
 #### 自定义View
