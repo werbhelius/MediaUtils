@@ -6,7 +6,7 @@ A demo of record audio and video about Android
 
 GitHub 地址：[https://github.com/Werb/MediaUtils](https://github.com/Werb/MediaUtils)
 
-[![download](/app/src/main/res/mipmap-xhdpi/video.png)](https://fir.im/cbas) 也可直接点击下载体验
+[![download](/app/src/main/res/mipmap-xhdpi/video.png)](https://fir.im/n6yv) 也可直接点击下载体验
 
 * Android 的 MediaRecorder 相信用过的同学一定踩过很多坑
 * 之前写的代码很乱，现在重构了一下，可以直接放到自己的项目中用
