@@ -17,6 +17,7 @@ GitHub 地址：[https://github.com/Werb/MediaUtils](https://github.com/Werb/Med
 * 重绘了录制视频和录音时的两个自定义view，可在原本基础上进行二次开发
 * 提供了视频截图方法，支持双击放大，支持自动对焦
 * 视频录制暂时使用 SurfaceView + Camera , 后续会升级为 TextureView + Camera2
+* 简单的加了一下摄像头切换的操作，具体请看[MediaUtils.java/switchCamera()](https://github.com/Werb/MediaUtils/blob/master/app/src/main/java/com/werb/mediautilsdemo/MediaUtils.java#L373)
 
 ### 效果图
 
