@@ -44,6 +44,7 @@ public class MediaUtils implements SurfaceHolder.Callback {
     private GestureDetector mDetector;
     private boolean isZoomIn = false;
     private int or = 90;
+    private int cameraPosition = 1;//0代表前置摄像头，1代表后置摄像头
 
     public MediaUtils(Activity activity) {
         this.activity = activity;
@@ -61,14 +62,14 @@ public class MediaUtils implements SurfaceHolder.Callback {
         this.targetName = name;
     }
 
-    public String getTargetFilePath(){
+    public String getTargetFilePath() {
         return targetFile.getPath();
     }
 
-    public boolean deleteTargetFile(){
-        if(targetFile.exists()){
+    public boolean deleteTargetFile() {
+        if (targetFile.exists()) {
             return targetFile.delete();
-        }else {
+        } else {
             return false;
         }
     }
@@ -143,9 +144,14 @@ public class MediaUtils implements SurfaceHolder.Callback {
                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
                 mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
                 mMediaRecorder.setProfile(profile);
-                mMediaRecorder.setOrientationHint(or);
+                // 实际视屏录制后的方向
+                if(cameraPosition == 0){
+                    mMediaRecorder.setOrientationHint(270);
+                }else {
+                    mMediaRecorder.setOrientationHint(or);
+                }
 
-            } else if(recorderType == MEDIA_AUDIO){
+            } else if (recorderType == MEDIA_AUDIO) {
                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                 mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
                 mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
@@ -342,13 +348,13 @@ public class MediaUtils implements SurfaceHolder.Callback {
         }
     }
 
-    private  String getVideoThumb(String path) {
+    private String getVideoThumb(String path) {
         MediaMetadataRetriever media = new MediaMetadataRetriever();
         media.setDataSource(path);
         return bitmap2File(media.getFrameAtTime());
     }
 
-    private  String bitmap2File(Bitmap bitmap) {
+    private String bitmap2File(Bitmap bitmap) {
         File thumbFile = new File(targetDir,
                 targetName);
         if (thumbFile.exists()) thumbFile.delete();
@@ -362,6 +368,39 @@ public class MediaUtils implements SurfaceHolder.Callback {
             return null;
         }
         return thumbFile.getAbsolutePath();
+    }
+
+    public void switchCamera() {
+        int cameraCount = 0;
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        cameraCount = Camera.getNumberOfCameras();//得到摄像头的个数
+
+        for (int i = 0; i < cameraCount; i++) {
+            Camera.getCameraInfo(i, cameraInfo);//得到每一个摄像头的信息
+            if (cameraPosition == 1) {
+                //现在是后置，变更为前置
+                if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {//代表摄像头的方位，CAMERA_FACING_FRONT前置      CAMERA_FACING_BACK后置
+                    mCamera.stopPreview();//停掉原来摄像头的预览
+                    mCamera.release();//释放资源
+                    mCamera = null;//取消原来摄像头
+                    mCamera = Camera.open(i);//打开当前选中的摄像头
+                    startPreView(mSurfaceHolder);
+                    cameraPosition = 0;
+                    break;
+                }
+            } else {
+                //现在是前置， 变更为后置
+                if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {//代表摄像头的方位，CAMERA_FACING_FRONT前置      CAMERA_FACING_BACK后置
+                    mCamera.stopPreview();//停掉原来摄像头的预览
+                    mCamera.release();//释放资源
+                    mCamera = null;//取消原来摄像头
+                    mCamera = Camera.open(i);//打开当前选中的摄像头
+                    startPreView(mSurfaceHolder);
+                    cameraPosition = 1;
+                    break;
+                }
+            }
+        }
     }
 
 }

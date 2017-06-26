@@ -38,7 +38,7 @@ public class VideoRecorderActivity extends AppCompatActivity {
     private TextView btnInfo , btn;
     private TextView view;
     private SendView send;
-    private RelativeLayout recordLayout;
+    private RelativeLayout recordLayout, switchLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +66,13 @@ public class VideoRecorderActivity extends AppCompatActivity {
         send.backLayout.setOnClickListener(backClick);
         send.selectLayout.setOnClickListener(selectClick);
         recordLayout = (RelativeLayout) findViewById(R.id.record_layout);
+        switchLayout = (RelativeLayout) findViewById(R.id.btn_switch);
+        switchLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaUtils.switchCamera();
+            }
+        });
         // progress
         progressBar = (VideoProgressBar) findViewById(R.id.main_progress_bar);
         progressBar.setOnProgressEndListener(listener);

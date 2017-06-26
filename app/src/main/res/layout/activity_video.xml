@@ -32,6 +32,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <RelativeLayout
+                android:id="@+id/btn_switch"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="切换"
+                    android:layout_centerInParent="true"
+                    android:textSize="14sp"
+                    android:textColor="#ffffff"/>
+
+            </RelativeLayout>
+
             <com.werb.mediautilsdemo.widget.VideoProgressBar
                 android:id="@+id/main_progress_bar"
                 android:layout_width="85dp"
